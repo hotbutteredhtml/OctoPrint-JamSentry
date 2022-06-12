@@ -83,7 +83,7 @@ class JamSentryPlugin(octoprint.plugin.StartupPlugin,
         )
 
     def get_template_configs(self):
-        return [dict(type="settings", custom_bindings=True, template="jamsentry_settings.jinja2")]
+        return [dict(type="settings", custom_bindings=False, template="jamsentry_settings.jinja2")]
 
     def jamMessageReceived(self,machine,extruder,password):
         if password==self.pswd:

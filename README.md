@@ -1,15 +1,18 @@
 # OctoPrint-JamSentry
 
 This plugin provides support for JamSentry, a DIY sensor for detecting filament jam and runout conditions.
-No printer hardware or firmware changes are required to use the sensor. Information on how the concept
-behind JamSentry and detailed instructions on how to build one can be found at: https://robogardens.com/?p=2220
+No printer hardware or firmware changes are required to use the sensor. Original information on how the concept
+behind JamSentry came about can be found at: https://robogardens.com/?p=2220
+
+Updated build information and instructions can be found in the wiki. STL files and the Arduino sketch can be
+found on the Printables website at the following URL: https://www.printables.com/model/223589
 
 JamSentry is a compact device consisting of a microprocessor (ESP8266), a filament movement sensor, and a
 magnetometer. The magnetometer attaches to the side of the extruder motor and detects when the motor is driving.
 Basically, if the motor is driving and the filament isn't moving, then you have a jam or have run out
 of filament. On detection of this condition the JamSentry can:
  1. Raise (or lower) a line to provide a hardware indication emulating a filament runout switch
- 2. Send a message to the G-Code sender alerting it to the situation (this plugin implements the receiver)
+ 2. Send a message to the G-Code sender (OctoPrint) alerting it to the situation (this plugin implements the receiver)
  3. Send an alert of the condition (IFTTT is used)
  
 The JamSentry is a WiFi device and is configured via a web interface.
@@ -28,9 +31,9 @@ configuration parameters below.
 
 The JamSentry detects filament jams and runouts. When detected an alert is sent to the OctoPrint server on a given port.
 A password is also sent along to ensure that it is a legitimate JamSentry alert. To receive the alert properly,
-the following must be setup in the octoprint JamSentry plugin settings:
+the following must be setup in the OctoPrint JamSentry plugin settings:
  1. The address of the JamSentry (typically http://192.168.1.xxx). If the printer has multiple JamSentry units
- (one per extruder), then only one can be displayed. However the JamSentry plugin will still receive alerts from all units.
+ (one per extruder), then only one will be displayed. However the JamSentry plugin will still receive alerts from all units.
  The status can be displayed on a separate webpage.
  2. The port to listen on. This defaults to 27100. You can change the default that JamSentry uses. The JamSentry
  plugin must be configured to listen on whatever port the JamSentry uses to send the alert.
@@ -45,7 +48,8 @@ the following must be setup in the octoprint JamSentry plugin settings:
  
 NOTE:
 Example Pause G-Code script:
-    ; relative XYZE
+    
+	; relative XYZE
     G91
     M83
 
@@ -60,6 +64,7 @@ Example Pause G-Code script:
     G1 X0 Y0          
 
 Example Resume G-Code script:
+	
 	; relative extruder
 	M83
 
